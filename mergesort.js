@@ -18,11 +18,11 @@ function merge(arr1, arr2) {
 
   let firstArr, secondArr;
   if (arr1.length >= arr2.length) {
-    firstArr = arr1
-    secondArr = arr2
+    firstArr = arr1;
+    secondArr = arr2;
   } else {
-    firstArr = arr2
-    secondArr = arr1
+    firstArr = arr2;
+    secondArr = arr1;
   }
 
   if (secondArr.length === 0) {
@@ -39,8 +39,43 @@ function merge(arr1, arr2) {
     res.push(head2);
     secondArr.shift();
   }
-
-  return [ ...res, ...merge(firstArr, secondArr) ]
+  return [...res, ...merge(firstArr, secondArr)];
 }
 
+function mergeSort(array) {
+  let res = [];
+  const splitArr = split(array);
+  if (splitArr[0].length === 1 && splitArr[1].length === 1) {
+    res.push(merge(splitArr[0], splitArr[1]));
+  } else {
+    // splitArr.forEach((subArr) => {
+    //   res.push(mergeSort(subArr));
+    // });
 
+    res.concat(merge(mergeSort(splitArr[0]), mergeSort(splitArr[1])));
+  }
+  return res;
+}
+
+// const splitArr = split(array); //[[1,4], [52,7]]
+// splitArr.forEach((element) => {
+//   if (element.length === 1) {
+//     res.push(element);
+//   } else {
+//     res.push(split(element));
+//   }
+// });
+// return res;
+
+// if (array.length === 1) {
+//   return res.concat(array);
+// } else {
+//   res.concat(split(array));
+//}
+
+// for (let i = 0; i < splitArr.length; i++) {
+//   if (splitArr[i].length > 1) {
+//     split(splitArr[i]);
+//   }
+// }
+// return;
